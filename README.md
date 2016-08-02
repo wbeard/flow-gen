@@ -3,7 +3,7 @@
 
 #### Usage example
 ```
-gen -f types/Action.js
+gen -f flow-typed/Action.js
 ```
 
 #### Options
