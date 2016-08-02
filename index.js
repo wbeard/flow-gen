@@ -10,6 +10,7 @@ program
   .version(package.version)
   .option('-d, --debug', 'Print debug output')
   .option('-f, --file <file>', 'File to generate a type for')
+  .option('-o, --outDir <dir>', 'Directory to save generated classes to')
   .option('-p, --printAst', 'Print the AST created in Flow')
   .parse(process.argv);
 

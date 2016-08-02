@@ -10,5 +10,6 @@ gen -f types/Action.js
 ```
 -d, --debug, Print debug output
 -f, --file <file>, File to generate a type for
+-o, --outDir <dir> Directory to save generated classes
 -p, --printAst, Print the AST created in Flow
 ```
