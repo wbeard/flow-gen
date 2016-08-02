@@ -11,14 +11,12 @@ const buildClassProps = (classProps) => classProps.reduce((str, classProp) => {
 `);
 }, '');
 const buildInitialState = (classProps) => classProps.reduce((str, classProp) => {
-  return str.concat(`
-    result = result.set('${classProp.name}', '${classProp.type}');
-`);
+  return str.concat(`result = result.set('${classProp.name}', '${classProp.type}')`);
 }, '');
 
 
-export default (className, classProps) => {
-  return `// @flow
+export default (className, classProps) => (
+`// @flow
 import * as Immutable from 'immutable';
 
 export default class ${className} {
@@ -48,5 +46,4 @@ export default class ${className} {
   }
 
   ${buildClassProps(classProps)}
-}`;
-};
+}`);
