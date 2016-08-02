@@ -7,7 +7,7 @@ export default function getType(value) {
     case 'GenericTypeAnnotation':
       return AstToFlowTypesMap[id.name];
     case 'NullableTypeAnnotation':
-      return `?${AstToFlowTypesMap[getType(typeAnnotation)]}`;
+      return `?${getType(typeAnnotation)}`;
     default:
       return AstToFlowTypesMap[type];
   }

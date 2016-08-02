@@ -6,7 +6,7 @@ const getType = branch => branch.type;
 
 export default function getClassData(ast) {
   return ast.body.reduce((agg, branch) => {
-    const type = getType(branch.type);
+    const type = getType(branch);
 
     if (type === 'TypeAlias' || type === 'InterfaceDeclaration') {
       let className = getClassName(branch);
