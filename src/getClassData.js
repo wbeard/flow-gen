@@ -4,9 +4,9 @@ import getFlowType from './getFlowType';
 
 const getType = branch => branch.type;
 
-export default (ast) => (
-  ast.body.reduce((agg, branch) => {
-    const type = getType(branch);
+export default function getClassData(ast) {
+  return ast.body.reduce((agg, branch) => {
+    const type = getType(branch.type);
 
     if (type === 'TypeAlias' || type === 'InterfaceDeclaration') {
       let className = getClassName(branch);
@@ -18,4 +18,4 @@ export default (ast) => (
 
     return agg;
   }, [])
-);
+}

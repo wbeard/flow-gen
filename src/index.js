@@ -14,10 +14,6 @@ function directoryExists(path) {
 }
 
 export default function(ast, program) {
-  if (program.debug) {
-    console.log('index: ast paramter', ast);
-  }
-
   const outDirBasePath = program.outDir || 'models';
   const classData = getClassData(ast);
   const outDirExists = directoryExists(outDirBasePath);
