@@ -11,7 +11,7 @@ const buildClassProps = (classProps) => classProps.reduce((str, classProp) => {
 `);
 }, '');
 const buildInitialState = (classProps) => classProps.reduce((str, classProp) => {
-  return str.concat(`result = result.set('${classProp.name}', '${classProp.type}')`);
+  return str.concat(`result = result.set('${classProp.name}', '${classProp.type}');`);
 }, '');
 
 

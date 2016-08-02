@@ -1,8 +1,8 @@
-import getType from './getType';
+import getFlowType from './getFlowType';
 
-export default (branch) => (
-  branch.right.properties.map(({ key: { name }, value}) => ({
+export default (properties) => (
+  properties.map(({ key: { name }, value}) => ({
     name,
-    type: getType(value)
+    type: getFlowType(value)
   }))
 );

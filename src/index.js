@@ -17,7 +17,8 @@ export default function(ast, program) {
       if (err) {
         throw err;
       }
-      console.log('It\'s saved!');
+
+      console.log(`Saved ${className}`);
     });
   });
 }
