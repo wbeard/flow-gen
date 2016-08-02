@@ -1,20 +1,52 @@
-const buildClassProps = (classProps) => classProps.reduce((string, classProp) => {
-  return string.concat(`
-    get ${classProp.name}(): ${classProp.type} { return this.data.get(${classProp.name}) }
-    set${classProp.name}(value: ${classProp.type}): { return this.data.set(${classProp.name}, value) }
-  `);
+const capitalize = str => `${str[0].toUpperCase()}${str.slice(1)}`;
+const buildClassProps = (classProps) => classProps.reduce((str, classProp) => {
+  return str.concat(`
+  get ${classProp.name}(): ${classProp.type} {
+    return this.get('${classProp.name}');
+  }
+
+  set${capitalize(classProp.name)}(value: ${classProp.type}): this {
+    return this.set('${classProp.name}', value);
+  }
+`);
+}, '');
+const buildInitialState = (classProps) => classProps.reduce((str, classProp) => {
+  return str.concat(`
+    result = result.set('${classProp.name}', '${classProp.type}');
+`);
 }, '');
 
+
 export default (className, classProps) => {
-  return `
-  import * as Immutable from 'immutable';
+  return `// @flow
+import * as Immutable from 'immutable';
 
-  class ${className} {
-    constructor() {
-      this.data = Immutable.Map();
-    }
+export default class ${className} {
+  state: Immutable.Map<string, any>;
 
-    ${buildClassProps(classProps)}
+  constructor(state: ?Immutable.Map<string, any>) {
+    this.state = state || this.initialize();
   }
-  `;
+
+  clone(value: Immutable.Map<string, any>): this {
+    const constructor = this.constructor;
+    return value === this.state ? this : new constructor(value);
+  }
+
+  initialize() {
+    let result = Immutable.Map();
+    ${buildInitialState(classProps)}
+    return result;
+  }
+
+  get(property: string) {
+    return this.state.get(property);
+  }
+
+  set(property: string, value: any): this {
+    return this.clone(this.state.set(property, value));
+  }
+
+  ${buildClassProps(classProps)}
+}`;
 };

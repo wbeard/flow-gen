@@ -6,8 +6,6 @@ import buildClass from './buildClass';
 const { className, classProps } = getClassData(sample)[0];
 const actionClass = buildClass(className, classProps);
 
-console.log(actionClass);
-
 fs.writeFile(`./models/${className}.js`, actionClass, (err) => {
   if (err) {
     throw err;
